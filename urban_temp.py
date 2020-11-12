@@ -31,11 +31,9 @@ class UrbanWeather:
 		self.climate["LOCAL_DATE"] = self.climate["LOCAL_DATE"].dt.date
 		urban = []
 
-		for climate_city in climate_coords:
-			lng = climate_city[0]
-			lat = climate_city[1]
+		for location in climate_coords:
 			for city in city_coords:
-				if self.haversine_np(city[0], city[1], lng, lat) < urban_radius:
+				if self.haversine_np(city[0], city[1], location[0], location[1]) < urban_radius:
 					urban.append(True)
 					break
 				else:
