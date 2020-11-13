@@ -52,8 +52,15 @@ class UrbanWeather:
 
 if __name__ == "__main__":
 	data = UrbanWeather("cities.csv", "climate.csv", 25) # take urban_radius = 25
-	for day in range(10, 32):
-		date = "2020-01-" + str(day)
-		temperatures = data.urban_temp(date)
-		print("Mean urban temparature on", date + ":", temperatures.mean())
-		print("Median urban temparature on", date + ":", temperatures.median())
+	end = {"01": 32, "02": 30}
+	for month in ("01", "02"):
+		for day in range(1, 10):
+			date = "2020-" + month + "-0" + str(day)
+			temperatures = data.urban_temp(date)
+			print("Mean urban temparature on", date + ":\t", temperatures.mean())
+			print("Median urban temparature on", date + ":\t", temperatures.median())
+		for day in range(10, end[month]):
+			date = "2020-" + month + "-" + str(day)
+			temperatures = data.urban_temp(date)
+			print("Mean urban temparature on", date + ":\t", temperatures.mean())
+			print("Median urban temparature on", date + ":\t", temperatures.median())
