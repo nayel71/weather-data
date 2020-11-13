@@ -6,13 +6,11 @@ class UrbanWeather:
 	   be urban if it is within urban_radius kilometres of some city.
 	"""
 	@staticmethod
-	def haversine_np(lng1, lat1, lng2, lat2):
-		"""Return the great circle distance in kilometres between two locations with
-		   coordinates (lng1, lat1) and (lng2, lat2) specified in decimal degrees.
-		"""
-		lng1, lat1, lng2, lat2 = map(np.radians, [lng1, lat1, lng2, lat2])
-		dlng = lng2 - lng1
+	def haversine_np(location1, location2):
+		"""Return the great circle distance in kilometres between two locations."""
+		lat1, lng1, lat2, lng2 = map(np.radians, [location1[0], location1[1], location2[0], location2[1]])
 		dlat = lat2 - lat1
+		dlng = lng2 - lng1
 		a = np.sin(dlat/2.0)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlng/2.0)**2
 		c = 2 * np.arcsin(np.sqrt(a))
 		km = 6367 * c
@@ -22,8 +20,8 @@ class UrbanWeather:
 		self.cities = pd.read_csv(cities_csv)
 		self.climate = pd.read_csv(climate_csv)
 
-		city_coords = self.cities[["lng", "lat"]].to_numpy()
-		climate_coords = self.climate[["lng", "lat"]].to_numpy()
+		city_coords = self.cities[["lat", "lng"]].to_numpy()
+		climate_coords = self.climate[["lat", "lng"]].to_numpy()
 		self.climate["LOCAL_DATE"] = pd.to_datetime(
 			self.climate["LOCAL_DATE"],
 			errors="coerce"
@@ -33,7 +31,7 @@ class UrbanWeather:
 
 		for location in climate_coords:
 			for city in city_coords:
-				if self.haversine_np(city[0], city[1], location[0], location[1]) < urban_radius:
+				if self.haversine_np(city, location) < urban_radius:
 					urban.append(True)
 					break
 				else:
