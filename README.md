@@ -28,9 +28,9 @@ For this exercise it's not important to consider scaling this to larger datasets
 
 ### Comments
 
-- The program takes about 2 seconds to answer a single query for the given dataset, so it should be able to handle larger datasets efficiently. Once the data files and `urban_radius` are specified on line 52, the program processes the data once and can quickly answer subsequent queries for any given date.
-- I spent roughly 3 hours on the problem and some more on improving the presentation. 
+- The program takes about 7 seconds to answer a single query for the given dataset, so it should be able to handle larger datasets efficiently. Once the data files and `urban_radius` are specified on line 52, the program processes the data once and can quickly answer subsequent queries for any given date.
+- I spent roughly 5 hours on the problem and some more on improving the presentation. 
 
 ### Other Observations
 
-- I noticed that with a 25 km `urban_radius` there were only 4 urban areas identified from the climates data. With a 20 km value there were only 3, and with 50 km there were 5.
+- I noticed that with a 25 km `urban_radius` there were 387 urban areas identified from the climates data, and with 10 km there were 276.
